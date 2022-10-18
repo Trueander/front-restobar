@@ -1,0 +1,81 @@
+<div class="container">
+
+<br>
+    <FONT SIZE=8 > Productos </FONT>
+    <button type="button" class="btn btn-primary" [routerLink]="['/administrador/productos/crear-producto']">Nuevo Producto</button>
+    <br>
+<hr>
+
+<div class="d-flex justify-content-between">
+   <span class="badge badge-light text-dark" style="cursor: pointer" (click)="mostrarTodosLosProductos()">TODOS</span>
+   <span class="badge badge-light text-dark" style="cursor: pointer" *ngFor="let categoria of categorias" (click)="seleccionarCategoria(categoria.id)"> <i [class]="categoria.urlImagen" class="mr-2" aria-hidden="true"></i> {{categoria.nombre}}</span>
+   
+  <!-- </div> -->
+</div>
+  
+  <div class="d-flex my-3">
+    <label for="nombre" class="col-form-label col-sm-2  font-weight-bold">Buscar productos</label>
+    <div class="col-sm-2">
+        <input type="text" class="form-control" name="nombre" placeholder="nombre" #nombre>
+    </div>
+    <button class="btn btn-outline-success" (click)="filtrarProductosPorNombre(nombre.value)" >
+      <i class="fas fa-search" ></i>
+    </button>
+
+      
+    
+    
+  </div>
+
+  <table class="table table-striped" >
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Producto</th>
+        <th scope="col">Descripcion</th>
+        <th scope="col">Categoria</th>
+        <th scope="col">Precio</th>
+        <th scope="col">Estado</th>
+        <th scope="col">Receta</th>
+      </tr>
+    </thead>
+    <tbody *ngIf="!filtroActivado">
+      <tr *ngFor="let producto of productosArray" (click)="editarProducto(producto.id)">
+        <th scope="row">{{producto.id}} </th>
+        <td>{{producto.nombre}} </td>
+        <td>{{producto.descripcion}} </td>
+        <td>{{producto.categoria.nombre}} </td>
+        <td>$ {{producto.precio}} </td>
+        <td>
+          <button type="button" class="btn btn-success btn-block" *ngIf="producto.estado == 'DISPONIBLE'">DISPONIBLE</button>
+          <button type="button" class="btn btn-danger btn-block" *ngIf="producto.estado == 'AGOTADO'">AGOTADO</button>
+        </td>
+        <td>
+          <a type="button" class="btn btn-info btn-block text-white" [routerLink]="['/administrador/productos',producto.id,'receta']" *ngIf="producto.categoria.nombre != 'BEBIDAS'">RECETA</a>
+        </td>
+      </tr>
+    </tbody>
+    <tbody *ngIf="filtroActivado">
+      <tr *ngFor="let producto of productosPorCategoriaSeleccionado" (click)="editarProducto(producto.id)">
+        <th scope="row">{{producto.id}} </th>
+        <td>{{producto.nombre}} </td>
+        <td>{{producto.descripcion}} </td>
+        <td>{{producto.categoria.nombre}} </td>
+        <td>$ {{producto.precio}} </td>
+        <td>
+          <button type="button" class="btn btn-success btn-block" *ngIf="producto.estado == 'DISPONIBLE'">DISPONIBLE</button>
+          <button type="button" class="btn btn-danger btn-block" *ngIf="producto.estado == 'AGOTADO'">AGOTADO</button>
+        </td>
+        <td>
+          <button type="button" class="btn btn-info btn-block text-white" [routerLink]="['administrador/productos',producto.id,'receta']" *ngIf="producto.categoria.nombre != 'BEBIDAS'">RECETA</button>
+        </td>
+      </tr>
+    </tbody>
+
+  </table>
+  <div class="alert alert-info" role="alert" *ngIf="filtroActivado && productosPorCategoriaSeleccionado.length == 0">
+    No hay productos a mostrar en esta categoría. 
+  </div>
+  <app-paginator [paginador]="paginador" *ngIf="paginador && !filtroActivado"></app-paginator>
+
+</div>

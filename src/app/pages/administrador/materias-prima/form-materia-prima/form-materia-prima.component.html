@@ -1,0 +1,52 @@
+<div class="container">
+    <div class="card mt-4" style="width: 40rem; margin: auto;">
+      <div class="card-body">
+        <div class="card-title">
+          Nueva materia prima
+  
+        </div>
+        <form #materiaPrimaForm="ngForm">
+        <div class="d-flex justify-content-between">
+          <div class="form-floating w-50">
+            <input type="text" [(ngModel)]="materiaPrima.nombre" minlength="2" class="form-control"  placeholder=" " name="nombre" required>
+          <label for="floatingInput">Nombre</label>
+          </div>
+          <div class="form-floating w-50 ms-2">
+            <input type="number" [(ngModel)]="materiaPrima.stock" class="form-control" placeholder=" " name="stock" required>
+          <label for="floatingInput">Stock</label>
+          </div>
+        </div>
+  
+        <div class="form-group form-floating mt-3">
+          <input type="number" [(ngModel)]="materiaPrima.cantidadMinima" class="form-control" placeholder=" " name="cantidadMinima" required>
+          <label for="floatingInput">Cantidad mínima</label>
+        </div>
+        <div class="form-group row">
+          <label for="descripcion" class="col-form-label col-sm-4">Unidad de medida</label>
+          <div class="col-sm-8">
+              <select  [(ngModel)]="materiaPrima.descripcion" class="form-select" name="descripcion" required>
+                  <option [ngValue]="undefined">--- Seleccionar unidad de medida ---</option>
+                  <option *ngFor="let desc of listaDescripcion" [ngValue]="desc">{{ desc }}</option>
+              </select>
+          </div>
+      </div>
+  
+  
+
+    
+        <button class="btn btn-primary mt-4 me-3" (click)="crearMateriaPrima()" [disabled]="!materiaPrimaForm.form.valid" *ngIf="!materiaPrima.id">
+          Guardar
+        </button>
+  
+        <button class="btn btn-primary mt-4 me-3" (click)="actualizarMateriaPrima()"  [disabled]="!materiaPrimaForm.form.valid" *ngIf="materiaPrima.id">
+          Actualizar
+        </button>
+  
+        <button [routerLink]="['/administrador/materias-prima']" class="btn btn-danger mt-4">
+          Salir
+        </button>
+      </form>
+      </div>
+    </div>
+   
+  </div>
