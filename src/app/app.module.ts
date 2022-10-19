@@ -31,6 +31,8 @@ import { HistorialRolComponent } from "./pages/administrador/roles/historial-rol
 import { HistorialUsuarioComponent } from "./pages/administrador/usuarios/historial-usuario/historial-usuario.component";
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { DashboardComponent } from "./pages/administrador/dashboard/dashboard.component";
+import { LineChartComponent } from "./pages/administrador/dashboard/components/line-chart/line-chart.component";
+import { PieChartComponent } from "./pages/administrador/dashboard/components/pie-chart/pie-chart.component";
 
 @NgModule({
   declarations: [
@@ -57,7 +59,9 @@ import { DashboardComponent } from "./pages/administrador/dashboard/dashboard.co
     FormMateriaPrimaComponent,
     HistorialRolComponent,
     HistorialUsuarioComponent,
-    DashboardComponent
+    DashboardComponent,
+    LineChartComponent,
+    PieChartComponent
   ],
   imports: [
     BrowserModule,

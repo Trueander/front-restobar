@@ -69,10 +69,19 @@ export class PedidoService {
   public obtenerPedidosPorRangoDeFecha(fecha_desde: string, fecha_hasta: string): Observable<any> {
     let params = new HttpParams();
     fecha_desde = '2022-10-16'
-    fecha_hasta = '2022-10-18'
+    fecha_hasta = '2022-10-19'
     params = params.set('fecha_desde', fecha_desde);
     params =  params.set('fecha_hasta', fecha_hasta);
     return this.httpClient.get<any>(`${this.pedidoURL}/pedidos-por-rango-fecha`, {params: params});
+  }
+
+  public topTresProductosMasVendidos(fecha_desde: string, fecha_hasta: string): Observable<any> {
+    let params = new HttpParams();
+    fecha_desde = '2022-10-16'
+    fecha_hasta = '2022-10-19'
+    params = params.set('fecha_desde', fecha_desde);
+    params =  params.set('fecha_hasta', fecha_hasta);
+    return this.httpClient.get<any>(`${this.pedidoURL}/productos-mas-vendidos`, {params: params});
   }
 
 }

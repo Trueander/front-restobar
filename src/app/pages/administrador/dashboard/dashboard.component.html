@@ -1,14 +1,82 @@
-<ngx-charts-line-chart
-  [view]="view"
-  [scheme]="colorScheme"
-  [legend]="legend"
-  [showXAxisLabel]="showXAxisLabel"
-  [showYAxisLabel]="showYAxisLabel"
-  [xAxis]="xAxis"
-  [yAxis]="yAxis"
-  [xAxisLabel]="xAxisLabel"
-  [yAxisLabel]="yAxisLabel"
-  [timeline]="timeline"
-  [results]="multi"
-  >
-</ngx-charts-line-chart>
+<div class="container">
+  
+  <div class="row mt-4 d-flex justify-content-around flex-wrap flex-md-nowrap align-items-center pt-3 pb-1 mb-1">
+    <div class="card col-sm mr-4">
+      <div class="card-body text-muted">
+        <div class=" d-flex justify-content-around">
+          <div>
+            <h5 class="card-title">PEDIDOS</h5>
+            <h4 class="card-text text-center">123</h4>
+          </div>
+          
+          <img src="../../../../assets/data.png" style="width: 60px" alt="...">
+        </div>
+        
+      </div>
+    </div>
+    <div class="card col-sm mr-4" >
+      <div class="card-body text-muted">
+        <div class=" d-flex justify-content-around">
+          <div>
+            <h5 class="card-title">GANANCIA</h5>
+            <h4 class="card-text text-center">S/. 15000</h4>
+          </div>
+          
+          <img src="../../../../assets/profit.png" style="width: 60px" alt="...">
+        </div>
+        
+      </div>
+    </div>
+    <div class="card col-sm">
+      <div class="card-body text-muted">
+        <div class="d-flex justify-content-around">
+          <div>
+            <h5 class="card-title">USUARIOS</h5>
+            <h4 class="card-text text-center">14</h4>
+          </div>
+          
+          <img src="../../../../assets/team.png" style="width: 60px" alt="...">
+        </div>
+        
+      </div>
+    </div>
+  
+    
+  </div>
+  <div class="mt-4 d-flex justify-content-between align-items-center pt-1 pb-2 mb-3 " >
+    <div class="card mb-3 col-sm mr-4">
+      <div class="card-header bg-white">Venta total</div>
+      <div class="card-body">
+        <div class="container" >
+          <!-- <div class="alert alert-info" role="alert">
+            No hay pedidos. Por favor elija otra fecha.
+          </div> -->
+          <app-line-chart></app-line-chart>
+  
+
+        </div>
+       
+    </div>
+    </div>
+    <div class="card mb-3 col-sm">
+      <div class="card-header bg-white">Productos Top</div>
+      <div class="card-body" >
+        <div >
+          <!-- <div class="alert alert-info" role="alert">
+            No hay pedidos. Por favor elija otra fecha.
+          </div> -->
+          <app-pie-chart></app-pie-chart>
+        </div>
+  
+      </div>
+    </div>
+  
+</div>
+
+
+</div>
+
+
+
+
+
