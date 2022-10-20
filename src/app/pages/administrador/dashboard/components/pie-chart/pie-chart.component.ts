@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { PedidoService } from 'src/app/services/pedido.service';
 
 @Component({
@@ -8,8 +8,11 @@ import { PedidoService } from 'src/app/services/pedido.service';
 })
 export class PieChartComponent implements OnInit {
 
-  single: any[] = [
-  ];
+  @Input() fecha_desde: Date;
+  @Input() fecha_hasta: Date;
+
+
+  single: any[] = [];
   view: any[] = [700, 400];
 
   // options
@@ -19,6 +22,8 @@ export class PieChartComponent implements OnInit {
   isDoughnut: boolean = true;
   legendPosition: string = 'right';
 
+  productosVendidos: any[] = [];
+
   colorScheme = {
     domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']
   };
@@ -27,13 +32,33 @@ export class PieChartComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.pedidoService.topTresProductosMasVendidos('','')
+    let fechaHoyFormateada = new Date().toISOString().slice(0,10);
+
+    this.obtenerDatosPorRangoDeFecha(fechaHoyFormateada,fechaHoyFormateada);
+
+    Object.assign(this, { single: this.single });
+  }
+
+  ngOnChanges() {
+    if(!this.fecha_desde || !this.fecha_hasta) {
+      return
+    }
+    this.single= [];
+
+    this.obtenerDatosPorRangoDeFecha(this.fecha_desde.toString(), this.fecha_hasta.toString());
+    Object.assign(this, { single: this.single })
+
+  }
+
+  obtenerDatosPorRangoDeFecha(fecha_desde: string, fecha_hasta: string) {
+    this.pedidoService.topTresProductosMasVendidos(fecha_desde,fecha_hasta)
     .subscribe(response => {
       this.single = []
       response.data.sort(this.compare);
       response.data.reverse();
+      this.productosVendidos = response.data;
       response.data.forEach((data, i) => {
-        if(i < 3) {
+        if(i < 5) {
           this.single.push(
             {
               "name": data.producto,
@@ -41,14 +66,11 @@ export class PieChartComponent implements OnInit {
             }
           )
         }
-
       })
-
-
     })
-
-    Object.assign(this, { single: this.single });
   }
+
+
 
   compare( a: any, b: any ) {
     if ( a.cantidad < b.cantidad ){

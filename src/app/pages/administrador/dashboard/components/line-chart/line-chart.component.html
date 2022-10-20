@@ -1,5 +1,5 @@
-<div style="height: 250px">
-    <ngx-charts-line-chart
+<div style="height: 250px" >
+    <ngx-charts-line-chart *ngIf="pedidosPorFecha.length > 0"
     [legend]="legend"
     [showXAxisLabel]="showXAxisLabel"
     [showYAxisLabel]="showYAxisLabel"
@@ -12,5 +12,9 @@
     autoScale="true"
     [results]="multi">
     </ngx-charts-line-chart>
+
+    <div class="alert alert-primary" role="alert" *ngIf="pedidosPorFecha.length == 0">
+        No hay pedidos en este rango de fechas.
+      </div>
 </div>
 

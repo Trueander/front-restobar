@@ -101,7 +101,7 @@ actualizarPedido() {
   let pedidoActualizar : Pedido = new Pedido();
 
   if(!this.pedidoEstadoAux.includes('EN_COLA') && this.pedidoSeleccionado.estado.includes('CANCELADO')) {
-    Swal.fire('Alerta', 'Los pedidos que no están EN_COLA no pueden cancelarse.','info')
+    Swal.fire('Alerta', 'El pedido solo se puede cancelar si está EN_COLA','info')
     return
   }
 
