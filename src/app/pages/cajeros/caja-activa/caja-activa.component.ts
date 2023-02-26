@@ -49,7 +49,7 @@ export class CajaActivaComponent implements OnInit {
           .subscribe(response => {
             this.cajaDtoOut = response.data;
             this.obtenerPedidosPorMesa();
-            console.log(this.cajaDtoOut)
+            this.cajaDtoOut.pedidos.reverse();
           }, err => {
             Swal.fire('Sin permisos', err.error.message, 'info');
             this.router.navigate(['/caja']);
@@ -164,6 +164,13 @@ quitarItemPedido(item: ItemPedido){
   }).then((result) => {
     if (result.isConfirmed) {
       this.pedidoSeleccionado.itemsList = this.pedidoSeleccionado.itemsList.filter(i => i.id != item.id);
+
+      this.cajaDtoOut.pedidos.forEach(p => {
+        p['total'] = 0;
+        p.itemsList.forEach(i => {
+          p['total'] += (i.cantidad * i.precio);
+        })
+      })
       let pedidoActualizar = new Pedido();
       pedidoActualizar.id = this.pedidoSeleccionado.id;
       pedidoActualizar.itemsList = this.pedidoSeleccionado.itemsList;
