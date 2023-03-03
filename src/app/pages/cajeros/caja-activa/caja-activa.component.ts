@@ -203,15 +203,12 @@ cerrarCaja() {
       })
     }
   })
+}
 
-
-
-
-
-
-
-
-
+generarBoletaDeCompra(pedidoId: number) {
+  let link = document.createElement("a");
+    link.href= `http://localhost:8080/pedidos/boleta/${pedidoId}`;
+    link.click();
 }
 
 }

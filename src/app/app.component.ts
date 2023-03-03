@@ -4,7 +4,6 @@ import { PedidoService } from './services/pedido.service';
 import { map, filter } from 'rxjs/operators';
 import { Mesa } from './models/mesa';
 import { NavigationEnd, Router } from '@angular/router';
-import { Observable } from 'rxjs';
 import { TokenService } from './pages/login/service/token.service';
  
 @Component({
@@ -14,11 +13,11 @@ import { TokenService } from './pages/login/service/token.service';
 })
 export class AppComponent {
 
-  porcentajeMesas = 0;
+  porcentajeMesas = 35;
 
-  cantidadPedidos = 0;
+  cantidadPedidos = 124;
 
-  ingresosHoy = 0;
+  ingresosHoy = 123220;
 
   rutaPrincipalActiva = true;
   
