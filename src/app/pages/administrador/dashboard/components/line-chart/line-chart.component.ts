@@ -59,7 +59,6 @@ export class LineChartComponent implements OnInit {
     this.pedidoService.obtenerPedidosPorRangoDeFecha(fecha_desde,fecha_hasta)
     .subscribe(response => {
       this.pedidosPorFecha = response.data
-      console.log(response.data.length,'data')
       this.multi = [];
       
       this.multi.push({
@@ -80,7 +79,6 @@ export class LineChartComponent implements OnInit {
         data.pedidos.forEach(p => pedidosTotales.push(p))
       })
       this.enviarGananciaDelosPedidosTerminados(pedidosTotales)
-      console.log(pedidosTotales)
 
       this.enviarNumeroTotalPedidos(pedidosTotales.length)
 
@@ -131,7 +129,6 @@ export class LineChartComponent implements OnInit {
           })
       }
     })
-    console.log(total, 'emitiendo ganancia')
     this.totalGananciaDePedidos.emit(total);
   }
 

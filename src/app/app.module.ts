@@ -35,6 +35,7 @@ import { LineChartComponent } from "./pages/administrador/dashboard/components/l
 import { PieChartComponent } from "./pages/administrador/dashboard/components/pie-chart/pie-chart.component";
 import { BarChartComponent } from "./pages/administrador/dashboard/components/bar-chart/bar-chart.component";
 import { MesasComponent } from "./pages/administrador/mesas/mesas.component";
+import { ReporteMozoChartComponent } from "./pages/administrador/dashboard/components/reporte-mozo-chart/reporte-mozo-chart.component";
 
 @NgModule({
   declarations: [
@@ -65,7 +66,8 @@ import { MesasComponent } from "./pages/administrador/mesas/mesas.component";
     LineChartComponent,
     PieChartComponent,
     BarChartComponent,
-    MesasComponent
+    MesasComponent,
+    ReporteMozoChartComponent
   ],
   imports: [
     BrowserModule,

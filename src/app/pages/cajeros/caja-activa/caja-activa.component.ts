@@ -71,6 +71,8 @@ export class CajaActivaComponent implements OnInit {
       return
     }
 
+    console.log(this.cajaDtoOut)
+
     this.cajaDtoOut.pedidos.forEach(p => {
       p['total'] = 0;
       p.itemsList.forEach(i => {
