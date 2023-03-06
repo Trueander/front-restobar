@@ -1,3 +1,4 @@
+import { DatePipe } from '@angular/common';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Pedido } from 'src/app/models/pedido';
 import { PedidoService } from 'src/app/services/pedido.service';
@@ -37,7 +38,7 @@ export class LineChartComponent implements OnInit {
 
   @Output() totalGananciaDePedidos = new EventEmitter<number>();
 
-  constructor(private pedidoService: PedidoService) { }
+  constructor(private pedidoService: PedidoService, private datePipe: DatePipe) { }
 
   ngOnInit(): void {
     let fechaHoyFormateada = new Date().toISOString().slice(0,10);
@@ -90,7 +91,8 @@ export class LineChartComponent implements OnInit {
     data.forEach(data => {
       this.multi[0].series.push(
         {
-          "name": this.convertirFecha(data.fecha.substring(5, data.fecha.length)),
+          // "name": this.convertirFecha(data.fecha.substring(5, data.fecha.length)),
+          "name": this.datePipe.transform(data.fecha, 'EEEE, dd/MM'),
           "value": this.obtenerMontoTotalPorFecha(data.pedidos)
         }
       )

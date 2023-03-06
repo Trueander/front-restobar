@@ -1,5 +1,6 @@
 import { HttpClientModule } from "@angular/common/http";
-import { NgModule } from "@angular/core";
+import { NgModule, LOCALE_ID  } from "@angular/core";
+import { CommonModule, DatePipe } from '@angular/common';
 import { ReactiveFormsModule,FormsModule } from "@angular/forms";
 import { BrowserModule } from "@angular/platform-browser";
 import { AppRoutingModule, routingComponents} from "./app-routing.module";
@@ -36,6 +37,10 @@ import { PieChartComponent } from "./pages/administrador/dashboard/components/pi
 import { BarChartComponent } from "./pages/administrador/dashboard/components/bar-chart/bar-chart.component";
 import { MesasComponent } from "./pages/administrador/mesas/mesas.component";
 import { ReporteMozoChartComponent } from "./pages/administrador/dashboard/components/reporte-mozo-chart/reporte-mozo-chart.component";
+import { registerLocaleData } from '@angular/common';
+import localeEs from '@angular/common/locales/es';
+
+registerLocaleData(localeEs, 'es');
 
 @NgModule({
   declarations: [
@@ -75,11 +80,12 @@ import { ReporteMozoChartComponent } from "./pages/administrador/dashboard/compo
     PagesModule,
     ToastrModule.forRoot(),
     FormsModule,    
+    CommonModule,
     BrowserAnimationsModule,
     NgxChartsModule,
     HttpClientModule,ReactiveFormsModule
   ],
-  providers: [interceptorProvider],
+  providers: [  interceptorProvider, DatePipe, {provide: LOCALE_ID, useValue: 'es'}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
