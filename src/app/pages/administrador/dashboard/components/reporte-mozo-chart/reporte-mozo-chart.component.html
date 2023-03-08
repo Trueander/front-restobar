@@ -1,7 +1,7 @@
 
 
 <div style="height: 250px;">
-  <ngx-charts-bar-vertical 
+  <ngx-charts-bar-vertical *ngIf="reporteMozos.length > 0"
   [results]="multi"
   [scheme]="'night'"
   [xAxis]="showXAxis"
@@ -20,4 +20,7 @@
     </div>
   </ng-template>
 </ngx-charts-bar-vertical >
+<div class="alert alert-primary" role="alert" *ngIf="reporteMozos.length == 0">
+  No hay ventas en este rango de fechas.
+</div>
 </div>

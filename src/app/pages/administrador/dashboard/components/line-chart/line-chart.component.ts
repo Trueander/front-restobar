@@ -69,7 +69,6 @@ export class LineChartComponent implements OnInit {
 
       this.cargarDatosSeries(response.data)
 
-      this.multi[0].series.sort(this.compare)
 
       
 
@@ -88,10 +87,11 @@ export class LineChartComponent implements OnInit {
   }
 
   cargarDatosSeries(data: any) {
+    data.sort(this.compare)
+
     data.forEach(data => {
       this.multi[0].series.push(
         {
-          // "name": this.convertirFecha(data.fecha.substring(5, data.fecha.length)),
           "name": this.datePipe.transform(data.fecha, 'EEEE, dd/MM'),
           "value": this.obtenerMontoTotalPorFecha(data.pedidos)
         }
@@ -117,7 +117,6 @@ export class LineChartComponent implements OnInit {
   }
 
   enviarNumeroTotalPedidos(nroTotalPedidos: number) {
-    console.log('emitiendo totalPedidos', nroTotalPedidos)
     this.totalPedidos.emit(nroTotalPedidos)
   }
 
@@ -135,10 +134,10 @@ export class LineChartComponent implements OnInit {
   }
 
   compare( a: any, b: any ) {
-    if ( a.name < b.name ){
+    if ( a.fecha < b.fecha ){
       return -1;
     }
-    if ( a.name > b.name ){
+    if ( a.fecha > b.fecha ){
       return 1;
     }
     return 0;

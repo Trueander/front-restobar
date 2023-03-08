@@ -90,8 +90,8 @@ export class PedidoService {
 
   public getReporteMozos(fecha_desde: string, fecha_hasta: string): Observable<any> {
     let params = new HttpParams();
-    params = params.set('fecha_desde', '2023-03-01');
-    params =  params.set('fecha_hasta', '2023-03-05');
+    params = params.set('fecha_desde', fecha_desde);
+    params =  params.set('fecha_hasta', fecha_hasta);
     return this.httpClient.get<any>(`${this.pedidoURL}/reporte-mozos`, {params: params})
   }
 

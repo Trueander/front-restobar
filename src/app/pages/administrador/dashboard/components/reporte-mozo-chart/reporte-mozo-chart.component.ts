@@ -27,19 +27,35 @@ export class ReporteMozoChartComponent implements OnInit {
   gradient: boolean = true;
   showLegend: boolean = true;
   showXAxisLabel: boolean = true;
-  xAxisLabel: string = 'Country';
+  xAxisLabel: string = 'Mozos';
   showYAxisLabel: boolean = true;
-  yAxisLabel: string = 'Population';
-  legendTitle: string = 'Years';
+  yAxisLabel: string = '$ Pesos';
+  legendTitle: string = 'Mozos';
 
 
   constructor(private pedidoService: PedidoService) { }
 
   ngOnInit(): void {
+    let fechaHoyFormateada = new Date().toISOString().slice(0,10);
 
+    this.obtenerDatosPorRangoDeFecha(fechaHoyFormateada,fechaHoyFormateada);
 
-    
-    this.pedidoService.getReporteMozos('323','323')
+    Object.assign(this, { single: this.multi });
+  }
+
+  ngOnChanges() {
+    if(!this.fecha_desde || !this.fecha_hasta) {
+      return
+    }
+    this.multi= [];
+
+    this.obtenerDatosPorRangoDeFecha(this.fecha_desde.toString(), this.fecha_hasta.toString());
+    Object.assign(this, { single: this.multi })
+
+  }
+
+  obtenerDatosPorRangoDeFecha(fecha_desde: string, fecha_hasta: string) {
+    this.pedidoService.getReporteMozos(fecha_desde,fecha_hasta)
     .subscribe(response => {
       this.reporteMozos = response.data;
       this.obtenerDatosReporteMozoChart(this.reporteMozos);
@@ -72,7 +88,18 @@ export class ReporteMozoChartComponent implements OnInit {
       itemsPush.push(itemPush);
     })
     this.multi = itemsPush;
+    this.multi.sort(this.compare)
+    this.multi.reverse()
   }
 
 
+  compare( a: any, b: any ) {
+    if ( a.value < b.value ){
+      return -1;
+    }
+    if ( a.value > b.value ){
+      return 1;
+    }
+    return 0;
+  }
 }
